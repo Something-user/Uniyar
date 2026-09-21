@@ -65,3 +65,5 @@ start, finish = map(int, input('Введите диапазон целых чи�
 nums = [randint(start, finish) for _ in range(n)]
 
 print(f'Ваш ответ: {stats_calculator(nums, mode1)}')
+
+#Просмотреть везде ли длинна строки 79 символов

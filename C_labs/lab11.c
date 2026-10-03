@@ -6,14 +6,16 @@ int main()
     int n, counter = 0, sum = 0;
     int formscan;
 
-
     int Nums[MAX_SIZE];
-    printf("Vvedite kolichestvo elementov: ");
-    formscan = scanf_s("%d", &n);
-    if (!formscan) {
-        printf("Vvedite chislo");
-        return 1;
-    }
+    do
+    {
+        printf("Vvedite kolichestvo elementov: ");
+        formscan = scanf_s("%d", &n);
+        if(!formscan){
+            printf("Vvedite tceloe chislo");
+            return 1;
+        }
+    } while(n <= 0 && formscan);
 
     int f;
     printf("Vvedite elementi cherez probel: \n");

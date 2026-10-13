@@ -31,6 +31,30 @@ void output_matrix(int array[MAX_SIZE][MAX_SIZE], int n, int m){ // Функци
 }
 */
 
+/*
+int sum_str_is_equal(int array[MAX_SIZE][], int n, int m){
+    int sum_str_one = 0, sum_str_two = 0;
+
+    for(int i = 0; i< n; i++)
+    {
+        int summa = 0;
+        for(int j = 0; j < m; j++)
+        {
+            summa += array[i][j];
+        }
+        sum_str_two = sum_str_one;
+        sum_str_one = summa;
+        if(sum_str_two != 0 && sum_str_two == sum_str_one){
+            sum_str_two = sum_str_one;
+            printf("yes");
+        }
+        else if(sum_str_two != 0 && sum_str_one != sum_str_two){
+            printf("Matritsa ne yavlyaetsa magicheskim kvadratom");
+            return 1;
+        }
+    }
+}
+*/
 
 int main()
 {

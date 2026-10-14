@@ -100,7 +100,7 @@ int main()
         int summa = 0;
         for(int j = 0; j < m; j++)
         {
-            summa += Matrix[i][j];
+            summa += Matrix[j][i];
         }
         sum_str_two = sum_str_one;
         sum_str_one = summa;

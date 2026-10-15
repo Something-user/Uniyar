@@ -6,10 +6,6 @@
 
 int input_matrix(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция ввода матрицы */
 
-
-int sum_direct_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы прямой диагонали */
-int sum_revers_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы обратной диагонали */
-
 /*
 int sum(int array[MAX_SIZE], int summa, int n){
     for(int i = 0, i < n; i++){
@@ -18,6 +14,11 @@ int sum(int array[MAX_SIZE], int summa, int n){
     return summa;
 }
 */
+
+int sum_str_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы строк */
+int sum_col_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы столбцов */
+int sum_direct_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы прямой диагонали */
+int sum_revers_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы обратной диагонали */
 
 /*
 void output_matrix(int array[MAX_SIZE][MAX_SIZE], int n, int m){ // Функция вывода матрицы
@@ -29,8 +30,6 @@ void output_matrix(int array[MAX_SIZE][MAX_SIZE], int n, int m){ // Функци
     }
 }
 */
-
-int sum_str_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы строк */
 
 int main()
 {
@@ -112,6 +111,29 @@ int sum_str_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m){
     return summa;
 }
 
+int sum_col_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m){
+    int summa = 0;
+    for(int i = 0; i < n-1; i++)
+    {
+        int sum1 = 0;
+        int sum2 = 0;
+        for(int j = 0; j < m; j++)
+        {
+            sum1 += array[j][i];
+            sum2 += array[j][i+1];
+        }
+        if(sum1 != sum2)
+        {
+            return 1;
+        }
+        else
+        {
+            summa = sum1;
+        }
+    }
+    return summa;
+}
+
 int sum_direct_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m){
     int summa = 0;
     for(int i = 0; i < n; i++)
@@ -131,3 +153,4 @@ int sum_revers_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m){
     }
     return summa;
 }
+

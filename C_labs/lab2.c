@@ -6,17 +6,18 @@
 
 int input_matrix(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция ввода матрицы */
 
-/*
-int sum(int array[MAX_SIZE], int summa, int n){
-    for(int i = 0, i < n; i++){
-        summa += array[i];
+int sum_diag_is_equal(int sum_diag1, int sum_diag2){
+    if(sum_diag1 != sum_diag2){
+        return 1;
     }
-    return summa;
+    else{
+        return sum_diag1;
+    }
 }
-*/
 
-int sum_str_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы строк */
-int sum_col_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы столбцов */
+
+int sum_str_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция проверки равенства сумм строк */
+int sum_col_is_equal(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция проверки равенства сумм столбцов */
 int sum_direct_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы прямой диагонали */
 int sum_revers_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m); /* Функция суммы обратной диагонали */
 
@@ -31,7 +32,7 @@ void output_matrix(int array[MAX_SIZE][MAX_SIZE], int n, int m){ // Функци
 }
 */
 
-int main()
+int main(void)
 {
     int Matrix[MAX_SIZE][MAX_SIZE]; /* Создание матрицы 20*20 */
     int n, m; // Создание пользовательских размеров
@@ -49,34 +50,37 @@ int main()
         }
 
     } while(n <= 0 || m <= 0 || m != n);
+
     if(input_matrix(Matrix, n, m) == 1)
     {
         printf("Enter numbers, not letters");
         return 1;
     }
-    input_matrix(Matrix, n, m); // Заполнение матрицы
 
     //output_matrix(Matrix, n, m);
 
-    for(int i = 0; i < n; i++){
-        int sum1 = 0;
-        int sum2 = 0;
-        for(int j = 1; j < m; j++){
-            sum1 += Matrix[j-1][i];
-            printf("%d\n", sum1);
-            sum2 += Matrix[j][i];
-            printf("V%d\n", sum2);
-        }
-        //printf("%d\n", sum1);
-        //printf("%d", sum2);
-        if(sum1 != sum2){
-            return 1;
-        }
-        else{
-            printf("Yes");
-        }
+    int sum_str = sum_str_is_equal(Matrix, n, m);
+    int sum_col = sum_col_is_equal(Matrix, n, m);
+    int sum_diag1 = sum_direct_diag(Matrix, n, m);
+    int sum_diag2 = sum_revers_diag(Matrix, n, m);
+
+    int sum_diag = sum_diag_is_equal(sum_diag1, sum_diag2);
+
+    if(sum_str == 1 || sum_col == 1 || sum_diag == 1){
+    /* Проверка, что суммы строк равны, суммы столбцов равны, суммы диагоналей равны*/
+        printf("The matrix is not a magic square");
+        return 1;
     }
 
+    if(sum_str == sum_col && sum_col == sum_diag){
+        printf("Magic square");
+    }
+    else{
+        printf("The matrix is not a magic square");
+        return 1;
+    }
+
+    return 0;
 }
 
 int input_matrix(int array[MAX_SIZE][MAX_SIZE], int n, int m){
@@ -153,4 +157,3 @@ int sum_revers_diag(int array[MAX_SIZE][MAX_SIZE], int n, int m){
     }
     return summa;
 }
-

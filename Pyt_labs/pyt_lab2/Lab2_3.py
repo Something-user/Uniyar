@@ -33,6 +33,7 @@ def superset(students, keys):
     for student_1 in keys:
         for student_2 in keys:
             if student_1 != student_2:
+                #if students[student_1].issuperset(students[student_2]):
                 if students[student_1] > students[student_2]:
                     res.append([student_1, student_2])
     return res

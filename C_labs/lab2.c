@@ -1,4 +1,6 @@
-/*
+/* Данная программа выполнена студентом ЯРГУ имени П.Г.Демидова направления программная инженерия Стрижовым Михаилом Николаевичем.
+ * Предназначение программы: определить является ли введенная с клавиатуры матрица магическим квадратом
+ * (суммы по всем строкам, столбцам и обеим диагоналям равны)
 */
 
 #include <stdio.h>
@@ -33,12 +35,11 @@ int main(void)
 
     } while(n <= 0 || m <= 0 || m != n);
 
+    printf("Enter the matrix: \n");
     if(input_matrix(Matrix, n, m) == 1){
         printf("Enter whole numbers, not letters");
         return 1;
     }
-
-    //output_matrix(Matrix, n, m);
 
     int sum_str = sum_str_is_equal(Matrix, n, m);
     int sum_col = sum_col_is_equal(Matrix, n, m);
@@ -65,7 +66,6 @@ int main(void)
 }
 
 int input_matrix(int array[MAX_SIZE][MAX_SIZE], int n, int m){
-    printf("Enter the matrix: \n");
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++){
             if(scanf("%d", &array[i][j]) != 1){

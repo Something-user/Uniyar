@@ -20,16 +20,14 @@ def superset(students, keys):
     return res
 
 
-def max_skills(sudents, keys):
-    maxi = []
-    res_student = ''
+def max_skills(students, keys):
+    maxi = 0
 
     for student_1 in keys:
-        if len(sudents[student_1]) > len(maxi):
-            maxi = list(sudents[student_1])
-            res_student = student_1
+        if len(students[student_1]) > maxi:
+            maxi = len(students[student_1])
 
-    return res_student
+    return [student for student in keys if len(students[student]) == maxi]
 
 
 def jaccards_ratio(set1, set2):
@@ -38,17 +36,20 @@ def jaccards_ratio(set1, set2):
     return len(set1 & set2) / len(set1 | set2)
 
 
+"""
 print(
     "Введите имя студента, затем с новой строки вводите его навыки по одному в строке.\n"
     "Для завершения ввода и перехода к другому студенту напишите пустую строку\n"
-    "Для завершения ввода студентов напишите '!!!'")
-
+    "Для завершения ввода студентов перейдите к вводу нового студента и напишите '!!!'")
+"""
 
 data = dict()
 keys = data.keys()
-n = input().title()
+n = input("Введите имя студента: ").title()
 
 while n != "!!!":
+    print("Введите его навыки по одному в строке\n"
+          "Для перехода к следующему студенту введите пустую строку")
     skills = set()
     while True:
         skill = input().lower().strip()
@@ -56,15 +57,14 @@ while n != "!!!":
             break
         skills.add(skill)
     data[n] = skills
-    n = input().capitalize()
+    n = input("Если хотите завершить ввод студентов впишите '!!!'\n"
+              "Введите имя студента: ").title()
 
-# print(same_skills(data, keys))
 if same_skills(data, keys):
     print(f"Студенты с совпадающими навыками: {same_skills(data, keys)}")
 else:
     print("Нет студентов с совпадающими навыками")
 
-# print(superset(data, keys))
 if superset(data, keys):
     print(f"Студент(ы), чьё множество навыков является строгим надмножеством "
           f"хотя бы одного студента: {superset(data, keys)}")

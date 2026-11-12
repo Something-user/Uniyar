@@ -47,7 +47,11 @@ int main()
 
 /*
     if(fscanf(in, "%d", &n) != 1){
+        if(fclose(in) != 0){
+            return 1;
+        }
         return 1;
+        
     }
 */
 

@@ -33,6 +33,7 @@ void make_list(DList *list); /* Функция создания и очистк�
 void list_init(FILE *in, int n, DList *list); /* Функция считывания списка из файла */
 void free_list(DList *list); /* Функция очистки паямти */
 void print_list(FILE *out, const DNode *head); /* Функция вывода обработанного списка в файл */
+DList *swap(int n, DList *list);
 
 int main()
 {
@@ -43,17 +44,15 @@ int main()
     }
 
     int n = 0;
-    fscanf(in, "%d", &n);
 
-/*
     if(fscanf(in, "%d", &n) != 1){
         if(fclose(in) != 0){
             return 1;
         }
         return 1;
-        
+
     }
-*/
+
 
     DList list;
     list_init(in, n, &list);
@@ -63,7 +62,7 @@ int main()
         free_list(&list);
         return 1;
     }
-    
+
 
 
 
@@ -109,7 +108,7 @@ void list_init(FILE *in, int n, DList *list)
 {
     //DNode *head = NULL;
     //DNode *tail = NULL;
-    
+
     make_list(list);
 
     for(int i = 0; i < n; i++){
@@ -157,17 +156,25 @@ void free_list(DList *list)
     make_list(list);
 }
 
-DNode *swap(int n, DList *list)
+DList *swap(int n, DList *list)
 {
-    if(n % 2){
+    if(n % 2 == 0){
         DNode *node = list->head;
         for(int i = 0; i < n/2; i++){
             node = node->next;
-            node = node->prev;
         }
-        
-        //DNode *cur = node;
+
+        DNode *cur = node->next;
+        cur->prev = NULL;
+        node->next = NULL;
+
+        list->head->prev = list->tail;
+        list->tail->next = list->head;
+
+        list->head = cur;
+        list->tail = node;
     }
+    return list;
 }
 
 

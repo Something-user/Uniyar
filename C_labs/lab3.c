@@ -33,7 +33,7 @@ void make_list(DList *list); /* Функция создания и очистк�
 void list_init(FILE *in, int n, DList *list); /* Функция считывания списка из файла */
 void free_list(DList *list); /* Функция очистки паямти */
 void print_list(FILE *out, const DNode *head); /* Функция вывода обработанного списка в файл */
-DNode *swap(DList *list, int n);
+void swap(DList *list, int n); /* */
 
 int main()
 {
@@ -64,7 +64,7 @@ int main()
     }
 
 
-    DNode *new_list = swap(&list, n);
+    swap(&list, n);
 
 
     FILE *out = fopen("output.txt", "w");
@@ -74,7 +74,7 @@ int main()
         return 1;
     }
 
-    print_list(out, new_list);
+    print_list(out, list.head);
 
     if(fclose(out) != 0){
         free_list(&list);
@@ -157,11 +157,11 @@ void free_list(DList *list)
     make_list(list);
 }
 
-DNode *swap(DList *list, int n)
+void swap(DList *list, int n)
 {
     if(n % 2 == 0){
         DNode *node = list->head;
-        for(int i = 0; i < n/2; i++){
+        for(int i = 1; i < n/2; i++){
             node = node->next;
         }
 
@@ -175,7 +175,6 @@ DNode *swap(DList *list, int n)
         list->head = cur;
         list->tail = node;
     }
-    return list->head;
 }
 
 
